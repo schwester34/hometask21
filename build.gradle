@@ -7,14 +7,14 @@ repositories {
     mavenCentral()
 }
 
-def allureVersion = "2.17.3",
-    selenideVersion = "6.5.2",
-    appiumVersion = "8.0.0",
+def allureVersion = '2.18.1',
+    selenideVersion = '6.6.3',
+    appiumVersion = '8.1.1',
 //    appiumVersion = "7.6.0",
-    restAssured = "4.5.1",
+    restAssured = '5.1.1',
     junitVersion = "5.8.2",
     ownerVersion = "1.0.12",
-    slf4jVersion = "1.7.32"
+    slf4jVersion = '1.7.36'
 
 allure {
     report {
