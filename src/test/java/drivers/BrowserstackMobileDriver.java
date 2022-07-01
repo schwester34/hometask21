@@ -8,7 +8,6 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import java.net.MalformedURLException;
 import java.net.URL;
-
 public class BrowserstackMobileDriver implements WebDriverProvider {
     static BrowserstackConfig config = ConfigFactory.create(BrowserstackConfig.class, System.getProperties());
 
@@ -18,31 +17,29 @@ public class BrowserstackMobileDriver implements WebDriverProvider {
         MutableCapabilities mutableCapabilities = new MutableCapabilities();
         mutableCapabilities.merge(capabilities);
 
-
+        // Set your access credentials
         mutableCapabilities.setCapability("browserstack.user", config.browserstackUser());
         mutableCapabilities.setCapability("browserstack.key", config.browserstackKey());
 
-
+        // Set URL of the application under test
         mutableCapabilities.setCapability("app", config.app());
 
-
+        // Specify device and os_version for testing
         mutableCapabilities.setCapability("device", config.device());
         mutableCapabilities.setCapability("os_version", config.osVersion());
 
-
-        mutableCapabilities.setCapability("project", "First Junit5 Android Project");
-        mutableCapabilities.setCapability("build", "browserstack-build-1");
-        mutableCapabilities.setCapability("name", "first_test");
+        // Set other BrowserStack capabilities
+        mutableCapabilities.setCapability("project", config.project());
+        mutableCapabilities.setCapability("build", config.build());
+        mutableCapabilities.setCapability("name", config.name());
         return new RemoteWebDriver(getBrowserstackUrl(), mutableCapabilities);
     }
 
     public static URL getBrowserstackUrl() {
         try {
-            BrowserstackConfig browserstackConfig = ConfigFactory.create(BrowserstackConfig.class);
-            return new URL(browserstackConfig.browserstackURL());
+            return new URL("http://hub.browserstack.com/wd/hub");
         } catch (MalformedURLException e) {
             throw new RuntimeException(e);
         }
     }
-
 }

@@ -2,9 +2,7 @@ package config;
 
 import org.aeonbits.owner.Config;
 
-@Config.LoadPolicy(Config.LoadType.MERGE)
-@Config.Sources({"system:properties",
-        "classpath:configuration/browserstackConfig.properties"})
+@Config.Sources("classpath:config/browserstack.properties")
 
 public interface BrowserstackConfig extends Config{
 
@@ -23,10 +21,13 @@ public interface BrowserstackConfig extends Config{
     @Key("os_version")
     String osVersion();
 
-    @Key("browserstack_url")
-    String browserstackURL();
+    @Key("project")
+    String project();
 
-    @Key("browserstack_session_json_url")
-    String sessionJsonUrl();
+    @Key("build")
+    String build();
+
+    @Key("name")
+    String name();
 
 }
