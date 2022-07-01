@@ -1,6 +1,6 @@
 package drivers;
 import com.codeborne.selenide.WebDriverProvider;
-import config.MobileConfig;
+import config.BrowserstackConfig;
 import org.aeonbits.owner.ConfigFactory;
 import org.openqa.selenium.Capabilities;
 import org.openqa.selenium.MutableCapabilities;
@@ -10,7 +10,7 @@ import java.net.MalformedURLException;
 import java.net.URL;
 
 public class BrowserstackMobileDriver implements WebDriverProvider {
-    static MobileConfig config = ConfigFactory.create(MobileConfig.class, System.getProperties());
+    static BrowserstackConfig config = ConfigFactory.create(BrowserstackConfig.class, System.getProperties());
 
     @Override
     public WebDriver createDriver(Capabilities capabilities) {
@@ -30,15 +30,16 @@ public class BrowserstackMobileDriver implements WebDriverProvider {
         mutableCapabilities.setCapability("os_version", config.osVersion());
 
 
-        mutableCapabilities.setCapability("project", config.project());
-        mutableCapabilities.setCapability("build", config.build());
-        mutableCapabilities.setCapability("name", config.name());
+        mutableCapabilities.setCapability("project", "First Junit5 Android Project");
+        mutableCapabilities.setCapability("build", "browserstack-build-1");
+        mutableCapabilities.setCapability("name", "first_test");
         return new RemoteWebDriver(getBrowserstackUrl(), mutableCapabilities);
     }
 
     public static URL getBrowserstackUrl() {
         try {
-            return new URL("http://hub.browserstack.com/wd/hub");
+            BrowserstackConfig browserstackConfig = ConfigFactory.create(BrowserstackConfig.class);
+            return new URL(browserstackConfig.browserstackURL());
         } catch (MalformedURLException e) {
             throw new RuntimeException(e);
         }
