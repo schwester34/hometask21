@@ -11,7 +11,6 @@ import static io.qameta.allure.Allure.step;
     public class MobileTest extends TestBase {
         @Test
         void searchTest() {
-            //back();
             step("Type search", () -> {
                 $(AppiumBy.id("org.wikipedia.alpha:id/search_container")).click();
                 $(AppiumBy.id("org.wikipedia.alpha:id/search_src_text")).sendKeys("tchaikovsky");
